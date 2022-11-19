@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using GJ2022.Global.PubSub;
 using UnityEngine.Events;
@@ -7,7 +5,7 @@ using GJ2022.Gameplay.SavePoint;
 
 namespace GJ2022.Gameplay.CharacterMovement
 {
-    public class PlayerDetection : MonoBehaviour
+    public class PlayerOrbDetection : MonoBehaviour
     {
         private UnityAction<object> _onPlayerNearby;
         private UnityAction<object> _onPlayerLeave;
