@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace GJ2022.Gameplay.CharacterMovement
@@ -23,6 +21,7 @@ namespace GJ2022.Gameplay.CharacterMovement
         private Vector3 _refVelocity = Vector3.zero;
         const float CHECK_RADIUS = .25f;
         private bool _isGrounded;
+        public bool _isInCutScene;
 
         private void Awake()
         {
@@ -45,6 +44,9 @@ namespace GJ2022.Gameplay.CharacterMovement
 
         private void Update()
         {
+            if (_isInCutScene)
+                return;
+
             _ = Input.GetKey(_input.Run) ? _isRunning = true : _isRunning = false;
             
             if (_isGrounded)
@@ -62,7 +64,6 @@ namespace GJ2022.Gameplay.CharacterMovement
 
         private void Jump()
         {
-            print("Jump");
             _rigidBody.AddForce(new Vector2(0f, _jumpHeight));
         }
         private void Move(PlayerFacing direction)
