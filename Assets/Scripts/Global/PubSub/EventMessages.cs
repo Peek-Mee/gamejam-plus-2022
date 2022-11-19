@@ -6,10 +6,10 @@ namespace GJ2022.Global.PubSub
     {
    
     }
-    public struct OrbInteractedMessage
+    public struct OrbObtainedMessage
     {
         public string OrbId { get; private set; }
-        public OrbInteractedMessage(string orbId)
+        public OrbObtainedMessage(string orbId)
         {
             OrbId = orbId;
         }
