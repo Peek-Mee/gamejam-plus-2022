@@ -1,18 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
-public class AudioController : MonoBehaviour
+namespace GJ2022.Global.AudioManager
 {
-    // Start is called before the first frame update
-    void Start()
+    public class AudioController : MonoBehaviour
     {
-        
+        [Header("Audio Mixers")]
+        [SerializeField] private AudioMixerGroup _masterMixer;
+        [SerializeField] private AudioMixerGroup _bgmMixer;
+        [SerializeField] private AudioMixerGroup _sfxMixer;
+
+        public static AudioController Instance { get; private set; }
+
+        private void Awake()
+        {
+            if (Instance != null && Instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            else
+            {
+                Instance = this;
+            }
+
+            DontDestroyOnLoad(gameObject);
+        }
+
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
