@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using TMPro;
 
 namespace GJ2022.Home.Settings
 {
@@ -18,6 +19,10 @@ namespace GJ2022.Home.Settings
     {
         [Header("Initialization")]
         [SerializeField] private TabPair[] _tabs;
+
+        [Header("Fonts")]
+        [SerializeField] private TMP_FontAsset _unselectedFont;
+        [SerializeField] private TMP_FontAsset _selectedFont;
         private int _activeIndex = 0;
 
         private void OnEnable()
@@ -28,7 +33,9 @@ namespace GJ2022.Home.Settings
                 _tabs[x].Button.onClick.AddListener(new UnityAction(() =>
                 {
                     _tabs[_activeIndex].Content.SetActive(false);
+                    _tabs[_activeIndex].Button.GetComponent<TMP_Text>().font = _unselectedFont;
                     _tabs[x].Content.SetActive(true);
+                    _tabs[x].Button.GetComponent<TMP_Text>().font = _selectedFont;
                     _activeIndex = x;
                 }));
             }

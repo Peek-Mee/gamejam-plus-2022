@@ -30,7 +30,7 @@ namespace GJ2022.Home.HomeView
             _isNewPlayer = SaveSystem.Instance.IsPlayerNew();
             if (_isNewPlayer)
             {
-                _continueButton.gameObject.SetActive(false);
+                _continueButton.interactable = false;
             }
         }
 
