@@ -4,6 +4,8 @@ using UnityEngine.Audio;
 
 namespace GJ2022.Global.AudioManager
 {
+    public enum AudioMixerType { MASTER, BGM, SFX }
+
     public class AudioController : MonoBehaviour
     {
         [Header("Audio Mixers")]
@@ -11,7 +13,7 @@ namespace GJ2022.Global.AudioManager
         [SerializeField] private AudioMixerGroup _bgmMixer;
         [SerializeField] private AudioMixerGroup _sfxMixer;
 
-        public enum AudioMixerType { MASTER, BGM, SFX }
+        
         public static AudioController Instance { get; private set; }
 
         private void Awake()
