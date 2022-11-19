@@ -11,8 +11,10 @@ namespace GJ2022.Global.SaveLoad
         [SerializeField] private string _lastSavePointId;
         [SerializeField] private List<string> _orbsCollected;
 
-        public Guid Id => _playerId;
-        public string LastSavePointId => _lastSavePointId;
+        public string GetLastSavePointId()
+        {
+            return _lastSavePointId;
+        }
 
         public PlayerData()
         {
