@@ -6,6 +6,7 @@ namespace GJ2022.Global.SaveLoad
     {
         public static SaveSystem Instance { get; private set; }
         private PlayerData _playerData;
+        private AudioSettingData _audioSettingData;
 
         private void Awake()
         {
@@ -20,36 +21,58 @@ namespace GJ2022.Global.SaveLoad
             }
 
             _playerData = new();
-            LoadPreviousData();
+            _audioSettingData = new();
+
+            LoadPreviousPlayerData();
+            LoadPreviousAudioSettingData();
             DontDestroyOnLoad(gameObject);
         }
 
-        private void LoadPreviousData()
+        private void LoadPreviousPlayerData()
         {
-            if (!PlayerPrefs.HasKey("Player Data"))
+            // Player Data Load
+            if (!PlayerPrefs.HasKey("PlayerData"))
             {
                 SavePlayerProgress();
             }
 
-            _playerData = JsonUtility.FromJson<PlayerData>(PlayerPrefs.GetString("Player Data"));
+            _playerData = JsonUtility.FromJson<PlayerData>(PlayerPrefs.GetString("PlayerData"));
 
+        }
+        private void LoadPreviousAudioSettingData()
+        {
+            if (!PlayerPrefs.HasKey("AudioSettingData"))
+            {
+                SaveAudioSetting();
+            }
+
+            _audioSettingData = JsonUtility.FromJson<AudioSettingData>(PlayerPrefs.GetString("AudioSettingData"));
         }
 
         public bool IsPlayerNew()
         {
-            if (_playerData.LastSavePointId == "") return true;
+            if (_playerData.GetLastSavePointId() == "") return true;
             return false;
         }
 
         public void SavePlayerProgress()
         {
-            PlayerPrefs.SetString("Player Data", JsonUtility.ToJson(_playerData));
+            PlayerPrefs.SetString("PlayerData", JsonUtility.ToJson(_playerData));
+            PlayerPrefs.Save();
+        }
+        public void SaveAudioSetting()
+        {
+            PlayerPrefs.SetString("AudioSettingData", JsonUtility.ToJson(_audioSettingData));
             PlayerPrefs.Save();
         }
 
         public PlayerData GetPlayerData()
         {
             return _playerData;
+        }
+        public AudioSettingData GetAudioSettingData()
+        {
+            return _audioSettingData;
         }
 
         public void ResetPlayerProgress()
