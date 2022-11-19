@@ -8,9 +8,9 @@ namespace GJ2022.Home.Settings
     [RequireComponent(typeof(RectTransform))]
     public class SettingsUI : MonoBehaviour
     {
-        [Header("Animations")]
-        [SerializeField] private GameObject _content;
-        [SerializeField] private GameObject _mainPanel;
+        //[Header("Animations")]
+        //[SerializeField] private GameObject _content;
+        //[SerializeField] private GameObject _mainPanel;
 
         [Header("BGM")]
         [SerializeField] private Slider _bgmSlider;
@@ -86,7 +86,7 @@ namespace GJ2022.Home.Settings
             {
                 toggle.isOn = false;
                 slider.interactable = true;
-                slider.value = (1.0f - _volume);
+                slider.value = _volume;
                 slider.onValueChanged.AddListener((float val) => { OnVolumeSliderChange(type, val); });
             }
             toggle.onValueChanged.AddListener((bool val) => { OnMuteToggleChange(type, val); });
@@ -96,7 +96,7 @@ namespace GJ2022.Home.Settings
         {
             var _audioSetting = SaveSystem.Instance.GetAudioSettingData();
 
-            var _value = 1.0f - value;
+            var _value = value;
             var _type = type;
 
             switch (_type)

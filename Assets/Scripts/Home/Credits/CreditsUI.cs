@@ -6,9 +6,9 @@ namespace GJ2022.Home.Credits
     [RequireComponent(typeof(RectTransform))]
     public class CreditsUI : MonoBehaviour
     {
-        [Header("Animations")]
-        [SerializeField] private GameObject _content;
-        [SerializeField] private GameObject _mainPanel;
+        //[Header("Animations")]
+        //[SerializeField] private GameObject _content;
+        //[SerializeField] private GameObject _mainPanel;
 
         [Header("Buttons")]
         [SerializeField] private Button _backBtn;

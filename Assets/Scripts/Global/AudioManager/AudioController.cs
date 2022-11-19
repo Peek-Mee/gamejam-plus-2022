@@ -45,6 +45,10 @@ namespace GJ2022.Global.AudioManager
                 MuteAudio(AudioMixerType.BGM);
             if (_audioSetting.IsSfxMute())
                 MuteAudio(AudioMixerType.SFX);
+
+            UpdateMixerVolume(AudioMixerType.MASTER, _audioSetting.GetMasterVolume());
+            UpdateMixerVolume(AudioMixerType.BGM, _audioSetting.GetBgmVolume());
+            UpdateMixerVolume(AudioMixerType.SFX, _audioSetting.GetSfxVolume());
         }
 
         public void MuteAudio(AudioMixerType type)
