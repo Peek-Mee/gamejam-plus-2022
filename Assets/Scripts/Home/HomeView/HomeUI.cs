@@ -21,6 +21,7 @@ namespace GJ2022.Home.HomeView
         [SerializeField] private GameObject _settingsPopUp;
         [SerializeField] private GameObject _creditsPopUp;
         [SerializeField] private GameObject _warningPopUp;
+        [SerializeField] private GameObject _warningExitApplication;
 
         private bool _isNewPlayer;
 
@@ -77,7 +78,7 @@ namespace GJ2022.Home.HomeView
         }
         private void OnExitButton()
         {
-            Application.Quit();
+            _warningExitApplication.SetActive(true);
         }
     }
 }
