@@ -37,7 +37,7 @@ namespace GJ2022.Global.SaveLoad
             }
 
             _playerData = JsonUtility.FromJson<PlayerData>(PlayerPrefs.GetString("PlayerData"));
-
+            print(_playerData.TotalOrbsCollected());
         }
         private void LoadPreviousAudioSettingData()
         {

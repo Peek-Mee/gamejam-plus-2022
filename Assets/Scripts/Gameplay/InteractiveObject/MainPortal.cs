@@ -26,14 +26,19 @@ namespace GJ2022.Gameplay.InteractiveObject
 
         private void Start()
         {
-            if (SaveSystem.Instance.GetPlayerData().TotalOrbsCollected() > _orbsToOpen)
+            int _totalCollectedOrb = SaveSystem.Instance.GetPlayerData().TotalOrbsCollected();
+            if (_totalCollectedOrb > _orbsToOpen)
             {
                 gameObject.SetActive(false);
                 return;
+            }else if (_totalCollectedOrb == _orbsToOpen)
+            {
+                _collider2d = GetComponent<Collider2D>();
+                _collider2d.enabled = true;
+                TweenOpenPortal();
+
             }
-            _collider2d = GetComponent<Collider2D>();
-            _collider2d.enabled = false;
-            
+
         }
         private void OnEnable()
         {
@@ -53,7 +58,6 @@ namespace GJ2022.Gameplay.InteractiveObject
                 return;
             if (Input.GetKeyDown(KeyCode.E))
             {
-                
                 TweenClosePortal(collision.gameObject);
             }
         }
@@ -70,10 +74,13 @@ namespace GJ2022.Gameplay.InteractiveObject
 
         private void TweenOpenPortal()
         {
-            LeanTween.scale(gameObject, _defaultScale, 1.5f).setOnUpdateVector3( val =>
-            {
-                transform.localScale = val;
-            });
+            LeanTween.scale(gameObject, _defaultScale, 1.5f).setOnUpdateVector3(val =>
+           {
+               transform.localScale = val;
+           }).setOnComplete(() =>
+           {
+               _isPortalOpened = true;
+           });
         }
         private void TweenClosePortal(GameObject go)
         {

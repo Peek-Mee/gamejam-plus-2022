@@ -15,7 +15,11 @@ namespace GJ2022.Gameplay.SavePoint
         }
         public Vector3 GetSpawnPosition(string orbId)
         {
-            return System.Array.Find(_orbsCollection, orb => orb.Id == orbId).Position;
+            var _orb = System.Array.Find(_orbsCollection, orb => orb.Id == orbId);
+            if (_orb != null)
+                return _orb.Position;
+            return Vector3.positiveInfinity;
+            
         }
     }
 

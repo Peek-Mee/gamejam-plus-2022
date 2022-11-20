@@ -9,6 +9,11 @@ namespace GJ2022.Gameplay.SavePoint
     {
         [SerializeField] private string _orbsId;
 
+        private void Start()
+        {
+            if (SaveSystem.Instance.GetPlayerData().IsOrbsObtained(_orbsId))
+                gameObject.SetActive(false);
+        }
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.CompareTag("Player"))
