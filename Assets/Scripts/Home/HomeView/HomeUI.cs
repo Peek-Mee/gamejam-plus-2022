@@ -25,7 +25,7 @@ namespace GJ2022.Home.HomeView
 
         private bool _isNewPlayer;
 
-        private void Awake()
+        private void Start()
         {
             _isNewPlayer = SaveSystem.Instance.IsPlayerNew();
             if (_isNewPlayer)
@@ -80,5 +80,6 @@ namespace GJ2022.Home.HomeView
         {
             _warningExitApplication.SetActive(true);
         }
+        
     }
 }
