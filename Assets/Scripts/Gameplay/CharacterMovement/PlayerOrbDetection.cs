@@ -1,6 +1,6 @@
 using UnityEngine;
-using GJ2022.Global.PubSub;
 using UnityEngine.Events;
+using GJ2022.Global.PubSub;
 using GJ2022.Gameplay.SavePoint;
 
 namespace GJ2022.Gameplay.CharacterMovement
