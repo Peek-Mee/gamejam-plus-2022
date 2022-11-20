@@ -20,6 +20,7 @@ namespace GJ2022.Gameplay.CharacterMovement
             _onPlayerNearby = new(OnPlayerNearby);
         }
 
+
         private void OnEnable()
         {
             EventConnector.Subscribe("OnPlayerNearby", _onPlayerNearby);
