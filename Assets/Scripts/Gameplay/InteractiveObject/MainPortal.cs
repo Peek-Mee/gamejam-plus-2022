@@ -8,22 +8,32 @@ namespace GJ2022.Gameplay.InteractiveObject
     [RequireComponent(typeof(Collider2D))]
     public class MainPortal : MonoBehaviour
     {
-        [SerializeField] private Vector2 _teleportPosition;
         [SerializeField] private int _orbsToOpen;
-        [SerializeField] GameObject _portalView;
+        [SerializeField] private ParticleSystem _particleSystem;
+        [SerializeField] private SidePortal _otherSidePortal;
+
         private bool _isPortalOpened = false;
         private Collider2D _collider2d;
+        private Vector3 _defaultScale;
 
         private UnityAction<object> _onOrbObtained;
+
         private void Awake()
         {
-            if (SaveSystem.Instance.GetPlayerData().TotalOrbsCollected() >= _orbsToOpen)
+            _defaultScale = transform.localScale;
+            transform.localScale = Vector3.zero;
+        }
+
+        private void Start()
+        {
+            if (SaveSystem.Instance.GetPlayerData().TotalOrbsCollected() > _orbsToOpen)
             {
                 gameObject.SetActive(false);
                 return;
             }
             _collider2d = GetComponent<Collider2D>();
             _collider2d.enabled = false;
+            
         }
         private void OnEnable()
         {
@@ -43,8 +53,8 @@ namespace GJ2022.Gameplay.InteractiveObject
                 return;
             if (Input.GetKeyDown(KeyCode.E))
             {
-                collision.gameObject.transform.position = _teleportPosition;
-                gameObject.SetActive(false);
+                
+                TweenClosePortal(collision.gameObject);
             }
         }
 
@@ -53,9 +63,36 @@ namespace GJ2022.Gameplay.InteractiveObject
             if (SaveSystem.Instance.GetPlayerData().TotalOrbsCollected() >= _orbsToOpen)
             {
                 _isPortalOpened = true;
-                _portalView.SetActive(true);
                 _collider2d.enabled = true;
+                TweenOpenPortal();
             }
+        }
+
+        private void TweenOpenPortal()
+        {
+            LeanTween.scale(gameObject, _defaultScale, 1.5f).setOnUpdateVector3( val =>
+            {
+                transform.localScale = val;
+            });
+        }
+        private void TweenClosePortal(GameObject go)
+        {
+            LeanTween.scale(gameObject, Vector3.zero, 1.5f).setOnUpdateVector3(val =>
+            {
+                transform.localScale = val;
+            }).setOnComplete(() =>
+            {
+                go.SetActive(false);
+                go.transform.position = _otherSidePortal.transform.position;
+                _particleSystem.Stop(true);
+                _otherSidePortal.Teleport();
+
+                LeanTween.value(0f, 1.0f, 1.5f).setOnComplete(() =>
+                {
+                    go.SetActive(true);
+                    gameObject.SetActive(false);
+                });
+            });
         }
 
     }
