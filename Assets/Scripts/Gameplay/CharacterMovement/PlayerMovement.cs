@@ -74,7 +74,7 @@ namespace GJ2022.Gameplay.CharacterMovement
                 FlipCharacterFacing();
             }
             float _speed = _isRunning ? _runningSpeed : _walkingSpeed;
-            _speed *= Time.deltaTime;
+            _speed *= Time.fixedDeltaTime;
             Vector3 _vectorChange = Vector3.zero;
 
             switch (direction)

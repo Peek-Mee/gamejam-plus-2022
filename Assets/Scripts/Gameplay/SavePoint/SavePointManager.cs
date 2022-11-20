@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -14,6 +12,14 @@ namespace GJ2022.Gameplay.SavePoint
             GameObject _orb = System.Array.Find(_orbsCollection, orb => orb.Id == orbId)?.GameObject;
             if (_orb != null)
                 _orb.GetComponent<ISavePointObject>().Interact();
+        }
+        public Vector3 GetSpawnPosition(string orbId)
+        {
+            var _orb = System.Array.Find(_orbsCollection, orb => orb.Id == orbId);
+            if (_orb != null)
+                return _orb.Position;
+            return Vector3.positiveInfinity;
+            
         }
     }
 

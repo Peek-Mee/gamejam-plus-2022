@@ -4939,4 +4939,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _teleportPosition: {x: 0, y: 0}
   _orbsToOpen: 3
-  _portalView: {fileID: 0}
+  _particleSystem: {fileID: 2890878735997500454}

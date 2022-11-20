@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using GJ2022.Gameplay.InteractiveObject;
 
@@ -18,6 +16,7 @@ namespace GJ2022.Gameplay.CharacterMovement
         {
             _playerRigidBody = GetComponent<Rigidbody2D>();
         }
+
 
         private void Update()
         {
