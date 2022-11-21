@@ -1,5 +1,7 @@
 using System.Collections;
 using UnityEngine;
+using GJ2022.Global.SaveLoad;
+using GJ2022.Global.PubSub;
 
 namespace GJ2022.Gameplay.InteractiveObject
 {
@@ -9,6 +11,7 @@ namespace GJ2022.Gameplay.InteractiveObject
         [SerializeField] private float _timeToDispose;
         [SerializeField] private ParticleSystem _particleSystem;
         private Vector3 _defaultScale;
+        [SerializeField] private string _id;
 
         public void Teleport()
         {
@@ -45,6 +48,10 @@ namespace GJ2022.Gameplay.InteractiveObject
             }).setOnComplete(() =>
             {
                 StartCoroutine(DisposeCountDown());
+                SaveSystem.Instance.GetPlayerData().SetLastSavePoint(_id);
+                SaveSystem.Instance.SavePlayerProgress();
+
+                EventConnector.Publish("OnOrbObtained", new OrbObtainedMessage(_id));
             });
         }
         private void TweenClosePortal()

@@ -31,5 +31,22 @@ namespace GJ2022.Global.PubSub
             OrbId = orbId;
         }
     }
+    public struct PlayerDialogueMessage
+    {
+        public int Id { get; private set; }
+        public float DisposeAfter { get; private set; }
+        public PlayerDialogueMessage(int id, float disposeAfter)
+        {
+            Id = id;
+            DisposeAfter = disposeAfter;
+        }
+    }
+
+
+    public struct PlayerOutDialogueMessage
+    {
+
+    }
+
 
 }

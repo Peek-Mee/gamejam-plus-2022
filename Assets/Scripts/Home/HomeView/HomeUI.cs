@@ -23,12 +23,10 @@ namespace GJ2022.Home.HomeView
         [SerializeField] private GameObject _warningPopUp;
         [SerializeField] private GameObject _warningExitApplication;
 
-        private bool _isNewPlayer;
 
         private void Start()
         {
-            _isNewPlayer = SaveSystem.Instance.IsPlayerNew();
-            if (_isNewPlayer)
+            if (SaveSystem.Instance.IsPlayerNew())
             {
                 _continueButton.interactable = false;
             }
@@ -59,7 +57,7 @@ namespace GJ2022.Home.HomeView
 
         private void OnStartButton()
         {
-            if (!_isNewPlayer)
+            if (!SaveSystem.Instance.IsPlayerNew())
                 _warningPopUp.SetActive(true);
             else
                 SceneManager.LoadScene(_gameplaySceneName);

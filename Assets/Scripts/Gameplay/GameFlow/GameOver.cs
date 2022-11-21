@@ -30,6 +30,8 @@ namespace GJ2022.Gameplay.GameFlow
         }
         private void OnHomeButton()
         {
+            SaveSystem.Instance.ResetPlayerProgress();
+            SaveSystem.Instance.SavePlayerProgress();
             SceneManager.LoadScene(_homeScene);
         }
         private void OnRestartButton()

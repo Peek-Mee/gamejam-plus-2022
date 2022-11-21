@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace GJ2022.Gameplay.InteractiveObject
@@ -7,6 +8,8 @@ namespace GJ2022.Gameplay.InteractiveObject
     {
         private FixedJoint2D _joint;
         private Rigidbody2D _rigidBody;
+        [SerializeField] private PhysicsMaterial2D _material;
+        [SerializeField] private GameObject _popUp;
 
         private void Awake()
         {
@@ -18,13 +21,30 @@ namespace GJ2022.Gameplay.InteractiveObject
         {
             _joint.enabled = true;
             _joint.connectedBody = playerRigidBody;
-            _rigidBody.bodyType = RigidbodyType2D.Dynamic;
+            _rigidBody.mass = 1;
         }
         public void PlayerStopInteract()
         {
             _joint.enabled = false;
             _joint.connectedBody = null;
-            _rigidBody.bodyType = RigidbodyType2D.Kinematic;
+            _rigidBody.mass = 10;
+        }
+        private IEnumerator Wait(RigidbodyType2D type)
+        {
+            yield return new WaitForSeconds(.25f);
+            _rigidBody.bodyType = type;
+        }
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (!collision.CompareTag("Player"))
+                return;
+            _popUp.SetActive(true);
+        }
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            if (!collision.CompareTag("Player"))
+                return;
+            _popUp.SetActive(false);
         }
     }
 }

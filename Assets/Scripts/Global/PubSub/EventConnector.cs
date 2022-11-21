@@ -48,6 +48,8 @@ namespace GJ2022.Global.PubSub
         /// <param name="listener">The event listener to process event update.</param>
         public static void Subscribe(string eventName, UnityAction<object> listener)
         {
+            print(eventName);
+            print(listener.Method.Name);
             if (listener == null) return;
             if (Instance._eventDictionary.TryGetValue(
                 eventName, out UnityEvent<object> thisEvent))
@@ -87,7 +89,7 @@ namespace GJ2022.Global.PubSub
             if (Instance._eventDictionary.TryGetValue(
                 eventName, out UnityEvent<object> thisEvent))
             {
-                thisEvent.Invoke(message);
+              thisEvent.Invoke(message);
             }
         }
     }

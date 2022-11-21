@@ -11,6 +11,7 @@ namespace GJ2022.Gameplay.CharacterMovement
         private bool _isInteracting = false;
         private Rigidbody2D _playerRigidBody;
         private IInteractive _targetInteraction;
+        [SerializeField] private GameObject _popUpDialogue;
 
         private void Awake()
         {

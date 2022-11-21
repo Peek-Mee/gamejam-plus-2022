@@ -11,6 +11,9 @@ namespace GJ2022.Gameplay.InteractiveObject
         [SerializeField] private int _orbsToOpen;
         [SerializeField] private ParticleSystem _particleSystem;
         [SerializeField] private SidePortal _otherSidePortal;
+        [SerializeField] private GameObject _popUp;
+        private bool _isInteracted;
+        bool _isAllowToInteract = false;
 
         private bool _isPortalOpened = false;
         private Collider2D _collider2d;
@@ -52,14 +55,38 @@ namespace GJ2022.Gameplay.InteractiveObject
 
         private void OnTriggerStay2D(Collider2D collision)
         {
-            if (!_isPortalOpened)
+            if (!_isPortalOpened && _isAllowToInteract)
                 return;
             if (!collision.CompareTag("Player"))
                 return;
             if (Input.GetKeyDown(KeyCode.E))
             {
+                _popUp.SetActive(false);
                 TweenClosePortal(collision.gameObject);
             }
+            
+
+        }
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (!collision.CompareTag("Player"))
+                return;
+            _isAllowToInteract = true;
+            _popUp.SetActive(true);
+
+            if (!_isInteracted)
+            {
+                _isInteracted = true;
+                EventConnector.Publish("OnPlayerDialogue", new PlayerDialogueMessage(2, 2.5f));
+            }
+        }
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            if (!collision.CompareTag("Player"))
+                return;
+            _isAllowToInteract = false;
+
+            _popUp.SetActive(false);
         }
 
         private void OnOrbObatined(object message)
@@ -67,7 +94,7 @@ namespace GJ2022.Gameplay.InteractiveObject
             if (SaveSystem.Instance.GetPlayerData().TotalOrbsCollected() >= _orbsToOpen)
             {
                 _isPortalOpened = true;
-                _collider2d.enabled = true;
+                GetComponent<Collider2D>().enabled = true;
                 TweenOpenPortal();
             }
         }

@@ -52,6 +52,7 @@ namespace GJ2022.Global.SaveLoad
         public bool IsPlayerNew()
         {
             if (_playerData.GetLastSavePointId() == "") return true;
+            else if (_playerData.TotalOrbsCollected() == 0) return true;
             return false;
         }
 
