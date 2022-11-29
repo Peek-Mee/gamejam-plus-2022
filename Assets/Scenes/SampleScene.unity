@@ -385,6 +385,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2a02c859f3e20946aaf67c21be82654, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _material: {fileID: 0}
+  _popUp: {fileID: 0}
 --- !u!255 &1304468105
 FixedJoint2D:
   m_ObjectHideFlags: 0
@@ -559,7 +561,7 @@ GameObject:
   - component: {fileID: 1805061468}
   - component: {fileID: 1805061467}
   - component: {fileID: 1805061466}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Square
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -669,10 +671,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2135761266}
   - component: {fileID: 2135761265}
-  - component: {fileID: 2135761264}
-  - component: {fileID: 2135761263}
-  - component: {fileID: 2135761262}
-  - component: {fileID: 2135761261}
+  - component: {fileID: 2135761268}
+  - component: {fileID: 2135761267}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Player
@@ -680,80 +680,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2135761261
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2135761260}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c409326b97e7b2c46b0cbb8592188a8c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _interactiveObjectMask:
-    serializedVersion: 2
-    m_Bits: 8
-  _distanceDetection: 1
---- !u!114 &2135761262
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2135761260}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7c8ac92b24852e4aab0b4d698908462, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _input: {fileID: 11400000, guid: ce65f259019aecc4d9b3615ed585c872, type: 2}
-  _whatIsGround:
-    serializedVersion: 2
-    m_Bits: 2147483647
-  _bottomCheck: {fileID: 1498108125}
-  _walkingSpeed: 50
-  _runningSpeed: 80
-  _jumpHeight: 400
-  _isInCutScene: 0
---- !u!50 &2135761263
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2135761260}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
---- !u!70 &2135761264
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2135761260}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 2}
-  m_Direction: 0
 --- !u!212 &2135761265
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -814,7 +740,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2135761260}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.41, y: -0.69, z: 0}
+  m_LocalPosition: {x: -5.68, y: 0.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -822,3 +748,53 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2135761267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2135761260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92bb57bb49afecd49b7bc07e1e4beba7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _characterBounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0.5, y: 1, z: 0}
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  _detectorCount: 3
+  _detectionRayLength: 0.1
+  _rayBuffer: 0.1
+  _acceleration: 90
+  _moveClamp: 13
+  _deAcceleration: 60
+  _apexBonus: 2
+  _fallClamp: -20
+  _minFallSpeed: 40
+  _maxFallSpeed: 60
+  _jumpHeight: 30
+  _jumpApexThreshold: 10
+  _coyoteTimeThreshold: 0.1
+  _jumpBuffer: 0.1
+  _jumpEndEarlyGravityModifier: 3
+  _freeColliderIterations: 10
+--- !u!70 &2135761268
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2135761260}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1, y: 2}
+  m_Direction: 0
